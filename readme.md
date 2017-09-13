@@ -1,4 +1,4 @@
-# Coordinator Extractor
+# Coordinates Extractor
 This script aims to extract the coordinates from a Google Maps URL.
 
 ### Running

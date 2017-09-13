@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 args = sys.argv
 
 if len(args) < 2:
-    raise Exception('You must to pass the location as argument. E.g. python init.py ""')
+    raise Exception('You must to pass the location as argument. E.g. python init.py "See me on Google Maps! https://maps.app.goo.gl/EGYoGW0WmMDbtNkD2"')
 
 location = sys.argv[1]
 

@@ -10,10 +10,14 @@ class CoordinatesExtractor(object):
         self.text = text
         self.lat = None
         self.long = None
+        self.regex = r'(http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)'
+
+    def text_check(self):
+        match = re.findall(self.regex, self.text)
+        return True if match and 'maps' in match[0] else False
 
     def get_match(self):
-        regex = r'(http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)'
-        match = re.findall(regex, self.text)
+        match = re.findall(self.regex, self.text)
 
         if not match:
             raise Exception('No URL found.')
@@ -34,9 +38,10 @@ class CoordinatesExtractor(object):
                 lat = '{lat}'.format(lat=items[2])
                 self.lat = float(lat.replace('[', '').replace(']', ''))
                 long = '{long}'.format(long=items[1])
-                self.long = float(long.replace('[', '').replace(']', ''))
-                break
-            except Exception as e:
-                raise Exception(e.args)
+                self.long = float(long.replace('[', '').replace(']', ''))                
+            except:
+                pass
+
+            break
         
         return self.lat, self.long

@@ -13,7 +13,7 @@ setup(
     version='0.0.1',
     author='CodeNonprofits - GreatNonprofits',
     author_email='support@greatnonprofits.org',
-    packages=['coordinates-extractor'],
+    packages=['coordinates_extractor'],
     url='https://github.com/codenonprofits/coordinates-extractor',
     license='BSD licence, see LICENCE.txt',
     description='Library consultation phone carriers around the world.',

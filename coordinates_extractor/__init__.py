@@ -29,7 +29,7 @@ class CoordinatesExtractor(object):
     def get_coordinates(self):
         response = requests.get(self.get_match(), timeout=10)
         soup = BeautifulSoup(response.content, 'html.parser')
-        scripts = soup.head.find_all('script')
+        script_tags = soup.head.find_all('script')
         
         for tag in script_tags:
             text = tag.get_text()

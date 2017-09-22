@@ -8,8 +8,9 @@ from bs4 import BeautifulSoup
 
 class CoordinatesExtractor(object):
 
-    def __init__(self, text, file_path=None, *args, **kwargs):
-        self.text = text or None
+    def __init__(self, text=None, file_path=None, *args, **kwargs):
+        assert text or file_path, 'text or file_path are required'
+        self.text = text
         self.lat = None
         self.long = None
         self.file_path = file_path

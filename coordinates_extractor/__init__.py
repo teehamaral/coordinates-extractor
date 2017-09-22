@@ -3,7 +3,7 @@ import sys
 import requests
 import vobject
 
-from urllib import parse
+from urlparse import urlparse, parse_qs
 from bs4 import BeautifulSoup
 
 class CoordinatesExtractor(object):
@@ -26,8 +26,8 @@ class CoordinatesExtractor(object):
                 content = file_card.contents
                 url = content.get('url', None)
                 if url:
-                    parse_url = parse.urlparse(url[0].value)
-                    parse_query = parse.parse_qs(parse_url.query)
+                    parse_url = urlparse(url[0].value)
+                    parse_query = parse_qs(parse_url.query)
                     coordinates = parse_query.get('ll')
                     self.lat, self.long = coordinates[0].split(',')
         except Exception as e:

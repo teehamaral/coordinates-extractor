@@ -6,6 +6,7 @@ import vobject
 from urlparse import urlparse, parse_qs
 from bs4 import BeautifulSoup
 
+
 class CoordinatesExtractor(object):
 
     def __init__(self, text=None, file_path=None, *args, **kwargs):

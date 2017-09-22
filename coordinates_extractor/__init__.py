@@ -21,12 +21,11 @@ class CoordinatesExtractor(object):
                 file_as_str = f.read()
                 
             file_card = vobject.readOne(file_as_str)
-            if hasattr(vcard, 'contents'):
-                content = vcard.contents
+            if hasattr(file_card, 'contents'):
+                content = file_card.contents
                 url = content.get('url', None)
                 if url:
-                    value = url[0].value
-                    parse_url = parse.urlparse(value)
+                    parse_url = parse.urlparse(url[0].value)
                     parse_query = parse.parse_qs(parse_url.query)
                     coordinates = parse_query.get('ll')
                     self.lat, self.long = coordinates[0].split(',')

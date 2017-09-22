@@ -1,15 +1,21 @@
 # Coordinates Extractor
 This script aims to extract the coordinates from a Google Maps URL.
 
-### Running
+### Install
 ```
+$ cd /your/project/path/
 $ virtualenv env
 $ source env/bin/activate
-$(env) pip install -r pip-freeze.txt
-$(env) python init.py "See me on Google Maps! https://maps.app.goo.gl/EGYoGW0WmMDbtNkD2"
+$(env) pip install git+https://github.com/codenonprofits/coordinates-extractor.git@change-to-lib
 ```
 
-### Result
+### Usage
 ```
-https://maps.app.goo.gl/EGYoGW0WmMDbtNkD2: 37.06250000000001,-95.67706800000001
+coordinates = CoordinatesExtractor(text="See me on Google Maps! https://maps.app.goo.gl/EGYoGW0WmMDbtNkD2")
+
+# Check if there's Google Maps URL
+coordinates.text_check()
+
+# Get coordinates
+(lat, long) = coordinates.get_coordinates()
 ```

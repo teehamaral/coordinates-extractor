@@ -1,16 +1,39 @@
 import re
 import sys
 import requests
+import vobject
 
+from urllib import parse
 from bs4 import BeautifulSoup
 
 class CoordinatesExtractor(object):
 
-    def __init__(self, text, *args, **kwargs):
-        self.text = text
+    def __init__(self, text, file_path=None, *args, **kwargs):
+        self.text = text or None
         self.lat = None
         self.long = None
+        self.file_path = file_path
         self.regex = r'(http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)'
+
+    def get_coordinates_from_file(self):
+        try:
+            with open(self.file_path, 'r') as f:
+                file_as_str = f.read()
+                
+            file_card = vobject.readOne(file_as_str)
+            if hasattr(vcard, 'contents'):
+                content = vcard.contents
+                url = content.get('url', None)
+                if url:
+                    value = url[0].value
+                    parse_url = parse.urlparse(value)
+                    parse_query = parse.parse_qs(parse_url.query)
+                    coordinates = parse_query.get('ll')
+                    self.lat, self.long = coordinates[0].split(',')
+        except Exception as e:
+            print('Error: %s' % e.args)
+
+        return self.lat, self.long
 
     def text_check(self):
         match = re.findall(self.regex, self.text)

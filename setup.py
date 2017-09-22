@@ -1,7 +1,6 @@
 from distutils.core import setup
 
 CLASSIFIERS = [
-    'Framework :: Django',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
@@ -10,7 +9,7 @@ CLASSIFIERS = [
 
 setup(
     name='coordinates-extractor',
-    version='0.0.1',
+    version='0.0.2',
     author='CodeNonprofits - GreatNonprofits',
     author_email='support@greatnonprofits.org',
     packages=['coordinates_extractor'],

@@ -52,20 +52,37 @@ class CoordinatesExtractor(object):
 
     def get_coordinates(self):
         response = requests.get(self.get_match(), timeout=10)
+
         soup = BeautifulSoup(response.content, 'html.parser')
         script_tags = soup.head.find_all('script')
-        
-        for tag in script_tags:
-            text = tag.get_text()
-            items = text.split(',')
-            try:
-                lat = '{lat}'.format(lat=items[2])
-                self.lat = float(lat.replace('[', '').replace(']', ''))
-                long = '{long}'.format(long=items[1])
-                self.long = float(long.replace('[', '').replace(']', ''))                
-            except:
-                pass
 
-            break
+        if script_tags:
+            tag = script_tags[0]
+            text = tag.get_text()
+
+            try:
+                items = text.split('"')
+
+                string_with_coordinates = items[62]
+                string_with_coordinates_split = string_with_coordinates.split(',')
+
+                try:
+                    lat = '{lat}'.format(lat=string_with_coordinates_split[4])
+                    self.lat = float(lat.replace('[', '').replace(']', ''))
+                    long = '{long}'.format(long=string_with_coordinates_split[3])
+                    self.long = float(long.replace('[', '').replace(']', ''))
+                except:
+                    pass
+
+            except Exception:
+                items = text.split(',')
+
+                try:
+                    lat = '{lat}'.format(lat=items[2])
+                    self.lat = float(lat.replace('[', '').replace(']', ''))
+                    long = '{long}'.format(long=items[1])
+                    self.long = float(long.replace('[', '').replace(']', ''))
+                except:
+                    pass
         
         return self.lat, self.long

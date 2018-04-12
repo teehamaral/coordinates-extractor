@@ -72,7 +72,7 @@ class CoordinatesExtractor(object):
                     long = '{long}'.format(long=string_with_coordinates_split[3])
                     self.long = float(long.replace('[', '').replace(']', ''))
                 except:
-                    pass
+                    raise Exception
 
             except Exception:
                 items = text.split(',')

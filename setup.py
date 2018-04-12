@@ -9,7 +9,7 @@ CLASSIFIERS = [
 
 setup(
     name='coordinates-extractor',
-    version='0.0.2',
+    version='0.0.3',
     author='CodeNonprofits - GreatNonprofits',
     author_email='support@greatnonprofits.org',
     packages=['coordinates_extractor'],
